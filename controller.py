@@ -5,17 +5,16 @@ from model import InputForm
 app = Flask(__name__)
 
 
-@app.route('/hw3', methods=['GET', 'POST'])
+@app.route('/hw1', methods=['GET', 'POST'])
 def index():
     form = InputForm(request.form)
     if request.method == 'POST' and form.validate():
         a = form.a.data
         b = form.b.data
         s = compute(a, b)
+        return render_template("view_output.html", form=form, s=s)
     else:
-        s = None
-
-    return render_template("view.html", form=form, s=s)
+        return render_template("view_input.html", form=form)
 
 
 if __name__ == '__main__':
